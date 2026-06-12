@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Para o Meu Amor 💖</title>
+
+<!-- Fontes: Playfair Display (títulos) + Poppins (textos) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   1. VARIÁVEIS DE TEMA (mude as cores aqui se quiser)
+   ========================================================= */
+:root{
+  --bg:        #fff7fb;
+  --rose:      #f9c6d4;
+  --rose-2:    #f7a9bd;
+  --red-soft:  #e86a77;
+  --gold:      #d4af37;
+  --ink:       #3d2a2e;
+  --ink-soft:  #7a6a6e;
+  --card:      #ffffff;
+  --glass:     rgba(255,255,255,0.55);
+  --shadow:    0 12px 30px rgba(233,92,119,0.15);
+  --shadow-hov:0 20px 45px rgba(233,92,119,0.28);
+  --radius:    22px;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'Poppins', system-ui, sans-serif;
+}
+
+/* =========================================================
+   2. RESET / BASE
+   ========================================================= */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+img{display:block;width:100%;height:100%;object-fit:cover;}
+section{padding:90px 22px;max-width:1100px;margin:0 auto;}
+
+.bg-fx{
+  position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(900px 600px at 12% -10%, #ffe3ee 0%, transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, #ffeef5 0%, transparent 55%),
+    var(--bg);
+}
+#hearts{position:fixed;inset:0;z-index:-1;pointer-events:none;}
+
+.section-title{
+  font-family:var(--serif);
+  font-size:clamp(1.8rem,4vw,2.6rem);
+  font-weight:700;text-align:center;
+  margin-bottom:14px;color:var(--ink);
+}
+.section-title span{color:var(--red-soft);}
+.section-sub{
+  text-align:center;color:var(--ink-soft);
+  max-width:520px;margin:0 auto 50px;font-weight:300;
+}
+
+/* =========================================================
+   3. TELA DE BOAS-VINDAS
+   ========================================================= */
+#welcome{
+  position:fixed;inset:0;z-index:50;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:24px;
+  background:radial-gradient(1000px 700px at 50% 30%, #ffe3ee 0%, var(--bg) 70%);
+  transition:opacity .9s ease, visibility .9s ease;
+}
+#welcome.hidden{opacity:0;visibility:hidden;}
+#welcome .heart-big{font-size:3.2rem;margin-bottom:10px;animation:beat 1.4s ease-in-out infinite;}
+#welcome h1{font-family:var(--serif);font-size:clamp(2rem,6vw,3.4rem);font-weight:700;line-height:1.2;margin-bottom:16px;}
+#welcome h1 span{color:var(--red-soft);}
+#welcome p{color:var(--ink-soft);max-width:460px;font-weight:300;margin-bottom:38px;font-size:1.05rem;}
+.btn-enter{
+  font-family:var(--sans);font-weight:500;font-size:1.05rem;
+  color:#fff;cursor:pointer;border:none;
+  padding:16px 38px;border-radius:50px;
+  background:linear-gradient(135deg,var(--red-soft),var(--rose-2));
+  box-shadow:0 12px 30px rgba(233,92,119,0.45);
+  transition:transform .3s ease, box-shadow .3s ease;
+  animation:pulse 2.4s ease-in-out infinite;
+}
+.btn-enter:hover{transform:translateY(-3px) scale(1.04);box-shadow:var(--shadow-hov);}
+
+/* =========================================================
+   4. CONTEÚDO PRINCIPAL (escondido até clicar no botão)
+   ========================================================= */
+#main{opacity:0;transition:opacity 1s ease .2s;}
+#main.show{opacity:1;}
+
+/* Hero do conteúdo */
+.hero{
+  text-align:center;padding:120px 22px 60px;max-width:760px;margin:0 auto;
+}
+.hero h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);font-weight:700;line-height:1.2;margin-bottom:18px;}
+.hero h2 span{color:var(--red-soft);}
+.hero p{color:var(--ink-soft);font-weight:300;font-size:1.08rem;}
+
+/* =========================================================
+   5. CONTADOR DE TEMPO
+   ========================================================= */
+.counter-wrap{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  max-width:760px;margin:0 auto;
+}
+.counter-box{
+  background:var(--glass);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.7);
+  border-radius:var(--radius);padding:26px 12px;text-align:center;
+  box-shadow:var(--shadow);
+}
+.counter-box .num{
+  font-family:var(--serif);font-size:clamp(1.8rem,5vw,2.6rem);
+  font-weight:700;color:var(--red-soft);line-height:1;
+}
+.counter-box .lbl{
+  display:block;margin-top:8px;font-size:.78rem;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);
+}
+
+/* =========================================================
+   6. LINHA DO TEMPO (TIMELINE)
+   ========================================================= */
+.timeline{position:relative;max-width:820px;margin:0 auto;}
+.timeline::before{
+  content:"";position:absolute;left:50%;top:0;bottom:0;width:3px;
+  transform:translateX(-50%);
+  background:linear-gradient(var(--rose-2),var(--gold));border-radius:3px;
+}
+.tl-item{
+  position:relative;width:50%;padding:20px 40px;
+  opacity:0;transform:translateY(30px);transition:all .7s ease;
+}
+.tl-item.in{opacity:1;transform:translateY(0);}
+.tl-item:nth-child(odd){left:0;text-align:right;}
+.tl-item:nth-child(even){left:50%;text-align:left;}
+.tl-item::after{
+  content:"";position:absolute;top:30px;width:18px;height:18px;
+  background:var(--red-soft);border:3px solid #fff;border-radius:50%;
+  box-shadow:0 0 0 4px rgba(233,92,119,0.25);
+}
+.tl-item:nth-child(odd)::after{right:-9px;}
+.tl-item:nth-child(even)::after{left:-9px;}
+.tl-card{
+  background:var(--card);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;display:inline-block;
+  text-align:left;width:100%;max-width:340px;
+}
+.tl-card img{height:180px;}
+.tl-card .tl-body{padding:18px 20px;}
+.tl-card h3{font-family:var(--serif);font-size:1.25rem;margin-bottom:6px;color:var(--red-soft);}
+.tl-card .date{font-size:.78rem;color:var(--gold);font-weight:500;letter-spacing:.5px;}
+.tl-card p{font-size:.92rem;color:var(--ink-soft);font-weight:300;margin-top:6px;}
+
+/* =========================================================
+   7. MURAL DE FOTOS
+   ========================================================= */
+.gallery{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;max-width:1000px;margin:0 auto;
+}
+.photo{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);aspect-ratio:1/1;cursor:pointer;
+}
+.photo img{transition:transform .6s ease;}
+.photo:hover img{transform:scale(1.08);}
+.photo .cap{
+  position:absolute;left:0;right:0;bottom:0;padding:14px;
+  background:linear-gradient(transparent, rgba(61,42,46,0.75));
+  color:#fff;font-size:.9rem;font-weight:300;
+  opacity:0;transform:translateY(10px);transition:all .4s ease;
+}
+.photo:hover .cap{opacity:1;transform:translateY(0);}
+
+/* =========================================================
+   8. CARTA DE AMOR (botão + modal)
+   ========================================================= */
+.letter-cta{text-align:center;}
+.btn-letter{
+  font-family:var(--sans);font-weight:500;font-size:1.02rem;color:#fff;
+  cursor:pointer;border:none;padding:15px 36px;border-radius:50px;
+  background:linear-gradient(135deg,var(--gold),#e6c65c);
+  box-shadow:0 12px 28px rgba(212,175,55,0.4);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.btn-letter:hover{transform:translateY(-3px) scale(1.03);box-shadow:var(--shadow-hov);}
+
+.modal-overlay{
+  position:fixed;inset:0;z-index:60;
+  display:flex;align-items:center;justify-content:center;padding:22px;
+  background:rgba(61,42,46,0.5);backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;transition:opacity .4s ease, visibility .4s ease;
+}
+.modal-overlay.open{opacity:1;visibility:visible;}
+.modal{
+  background:var(--card);border-radius:var(--radius);
+  max-width:600px;width:100%;max-height:85vh;overflow-y:auto;
+  padding:42px 36px;box-shadow:var(--shadow-hov);
+  transform:translateY(20px) scale(.97);transition:transform .4s ease;
+}
+.modal-overlay.open .modal{transform:translateY(0) scale(1);}
+.modal h2{font-family:var(--serif);font-size:1.8rem;color:var(--red-soft);margin-bottom:18px;text-align:center;}
+.modal p{font-size:1rem;color:var(--ink);font-weight:300;margin-bottom:14px;line-height:1.9;}
+.modal .sign{font-family:var(--serif);font-style:italic;text-align:right;color:var(--red-soft);margin-top:20px;}
+.modal-close{
+  display:block;margin:24px auto 0;border:none;cursor:pointer;
+  background:var(--red-soft);color:#fff;padding:12px 30px;border-radius:50px;
+  font-family:var(--sans);font-weight:500;transition:transform .3s ease;
+}
+.modal-close:hover{transform:scale(1.05);}
+
+footer{text-align:center;padding:50px 20px 70px;color:var(--ink-soft);font-weight:300;font-size:.9rem;}
+footer .heart{color:var(--red-soft);}
+
+/* Animação de entrada ao rolar */
+.reveal{opacity:0;transform:translateY(30px);transition:all .8s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* =========================================================
+   KEYFRAMES
+   ========================================================= */
+@keyframes beat{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+@keyframes pulse{0%,100%{box-shadow:0 12px 30px rgba(233,92,119,0.45);}50%{box-shadow:0 12px 42px rgba(233,92,119,0.7);}}
+
+/* =========================================================
+   RESPONSIVO (celular)
+   ========================================================= */
+@media(max-width:680px){
+  .counter-wrap{grid-template-columns:repeat(2,1fr);}
+  /* Timeline vira coluna única no celular */
+  .timeline::before{left:20px;}
+  .tl-item,
+  .tl-item:nth-child(odd),
+  .tl-item:nth-child(even){
+    width:100%;left:0;text-align:left;padding:20px 20px 20px 50px;
+  }
+  .tl-item:nth-child(odd)::after,
+  .tl-item:nth-child(even)::after{left:11px;right:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- Fundo e corações -->
+<div class="bg-fx"></div>
+<canvas id="hearts"></canvas>
+
+<!-- =========================================================
+     TELA DE BOAS-VINDAS
+     ========================================================= -->
+<div id="welcome">
+  <div class="heart-big">💗</div>
+  <!-- ⬇ EDITE AQUI: mensagem de boas-vindas -->
+  <h1>Feito com amor<br>para minha <span>Evellyn</span></h1>
+  <p>minha praga a coisa mais preciosa, favorita que eu tenho nesse mundo inteiro.</p>
+  <button class="btn-enter" id="enterBtn">Clique aqui, meu amor 💖</button>
+</div>
+
+<!-- =========================================================
+     CONTEÚDO PRINCIPAL
+     ========================================================= -->
+<div id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <!-- ⬇ EDITE AQUI: frase de abertura -->
+    <h2>O nosso <span>para sempre</span> começou nesse dia...</h2>
+    <p>E desde então, cada segundo ao seu lado e a melhor coisa que acontece na minha vida.</p>
+  </div>
+
+  <!-- CONTADOR DE TEMPO -->
+  <section class="reveal">
+    <h2 class="section-title">Estamos juntos há</h2>
+    <p class="section-sub">O tempo passa, mas o que sinto por você só cresce.</p>
+    <div class="counter-wrap">
+      <div class="counter-box"><span class="num" id="d">0</span><span class="lbl">Dias</span></div>
+      <div class="counter-box"><span class="num" id="h">0</span><span class="lbl">Horas</span></div>
+      <div class="counter-box"><span class="num" id="m">0</span><span class="lbl">Minutos</span></div>
+      <div class="counter-box"><span class="num" id="s">0</span><span class="lbl">Segundos</span></div>
+    </div>
+  </section>
+
+  <!-- LINHA DO TEMPO -->
+  <section class="reveal">
+    <h2 class="section-title">Nossa <span>história</span></h2>
+    <p class="section-sub">Os momentos que marcaram a nossa jornada.</p>
+    <div class="timeline">
+
+      <!-- ⬇ EDITE AQUI: copie um bloco .tl-item para adicionar mais momentos -->
+      <div class="tl-item">
+        <div class="tl-card">
+          <!-- ⬇ TROQUE o link da foto -->
+          <img src="./img/Anotação 2026-06-12 203322.png" alt="">
+          <div class="tl-body">
+            <span class="date">8 de Dezembro de 2025</span>
+            <h3>O dia em que eu pedi em voce em amoro</h3>
+            <p>Além do mais, voce me fez literalmente amar muito depois de perceber o como voce era insistente e tudo q me alegrava </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-card">
+          <img src="./img/image.png" alt="">
+          <div class="tl-body">
+            <span class="date">18 de Novembro de 2025</span>
+            <h3>Primeira coisa juntos</h3>
+            <p>Lembro dessa merda como se fosse hoje, nos jogando em call e tu me fazendo fazer tanta merda contigo que ate minha irmã entrou e estragou tudo, mas foi a minha primeira coisa que eu aceitei, muito obrigado por isso</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-card">
+          <img src="./img/Anotação 2026-06-12 203322.png" alt="">
+          <div class="tl-body">
+            <span class="date">10 de Julho de 2025</span>
+            <h3>Primeira merda juntos</h3>
+            <p>PQP KKKKKKKKKKKKKKKKKKKKKKKKKKKK, me deu uma saudades do krl quando eu brincava contigo sem nenhum preconceito foi como achar uma segunda alma minha pra entender como é uma brincadeira de verdade, voce nesses ultimos tempos que estive contigo (infelizmente) me fez sentir uma coisa que eu nunca pensei sentir por alguem </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MURAL DE FOTOS -->
+  <section class="reveal">
+    <h2 class="section-title">Nosso <span>mural</span></h2>
+    <p class="section-sub">Cada foto, uma lembrança que guardo com carinho.</p>
+    <div class="gallery">
+
+      <!-- ⬇ EDITE AQUI: copie um bloco .photo para adicionar mais fotos -->
+      <div class="photo">
+        <!-- ⬇ TROQUE o link da foto -->
+        <img src="./img/RobloxScreenShot20251119_215954633.png" alt="">
+        <div class="cap"> 💕</div>
+      </div>
+
+      <div class="photo">
+        <img src="./img/image3232.png" alt="">
+        <div class="cap"> ☀️</div>
+      </div>
+
+      <div class="photo">
+        <img src="./img/image0.jpg" alt="">
+        <div class="cap">Só nós dois 💗</div>
+      </div>
+
+      <div class="photo">
+        <img src="./img/RobloxScreenShot20260214_235853689.png" alt="">
+        <div class="cap"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CARTA DE AMOR -->
+  <section class="reveal letter-cta">
+    <h2 class="section-title">Uma <span>carta</span> para você</h2>
+    <p class="section-sub">Escrevi algumas palavras que vêm direto do coração.</p>
+    <button class="btn-letter" id="openLetter">Abrir minha carta 💌</button>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer>
+    Feito com muito <span class="heart">❤</span> só para você.
+  </footer>
+
+</div><!-- /#main -->
+
+<!-- =========================================================
+     MODAL DA CARTA DE AMOR
+     ========================================================= -->
+<div class="modal-overlay" id="letterModal">
+  <div class="modal">
+    <!-- ⬇ EDITE AQUI: título da carta -->
+    <h2>Meu amor 💖</h2>
+    <!-- ⬇ EDITE AQUI: escreva sua carta (adicione quantos <p> quiser) -->
+    <p>preciso uma vida inteira para colocar em palavras tudo o que você significa para mim pq em uma carta só não vai dar.</p>
+    <p>Desde o dia em que você entrou na minha vida, tudo ganhou mais cor, mais sentido e mais alegria. Você é o meu lugar favorito, o meu sorriso mais sincero vc consegue tirar todos os dias, eu amo voce com todo o meu amor do mundo, quando eu acordo eu instantaneamente envio mensagem pra voce, todos esses anos ninguem nunca me fez ficar feliz desse jeito como voce faz cmg, eu sinto uma grande admiração por voce e quero muito estar ao seu lado para tudo, querendo ou não voce se acha a pessoa mais inteligente do mundo e eu so faço o favor de te testar, cada momento, cada palavra em que eu brinco, xingo vc, mas eu me identifico com vc pq vc e a coisa que nunca mais vou deixar, mesma q vc seja so uma chata mas vc e a coisa mais importante do mundo pra mim e ninguem consegue fazer isso tão bem quanto vc, tu sempre foi do contra e bah gosto de vc para krl que nada que eu possa escrever aqui pode entender oq eu sinto muito por vc, so agradeço muito </p>
+    <p>Obrigado por cada gesto de carinho, por cada risada compartilhada e por simplesmente existir do meu lado. Eu te escolho hoje, amanhã e em todos os dias que ainda virão.</p>
+    <p>Te amo mais do que qualquer palavra poderia explicar.</p>
+    <!-- ⬇ EDITE AQUI: sua assinatura -->
+    <p class="sign">Para a maior praga dessa humanidade, Angelo</p>
+    <button class="modal-close" id="closeLetter">Fechar com um beijo 😘</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   1. TRANSIÇÃO DA TELA DE BOAS-VINDAS → CONTEÚDO
+   ========================================================= */
+const welcome = document.getElementById('welcome');
+const main    = document.getElementById('main');
+
+document.getElementById('enterBtn').addEventListener('click', () => {
+  welcome.classList.add('hidden');
+  main.classList.add('show');
+  // rola suavemente para o topo do conteúdo
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* =========================================================
+   2. CONTADOR DE TEMPO JUNTOS
+   ========================================================= */
+// ⬇ EDITE AQUI: coloque a data em que começaram a namorar
+//    Formato: ano, mês-1, dia, hora, minuto
+//    (atenção: o mês começa em 0 →janeiro = 0, fevereiro = 1, etc.)
+const inicio = new Date(2025, 11, 8, 20, 0); // ex: 01/01/2023 às 20:00
+
+function atualizarContador(){
+  const agora = new Date();
+  let diff = Math.max(0, agora - inicio); // diferença em milissegundos
+
+  const dias    = Math.floor(diff / (1000 * 60 * 60 * 24));
+  diff -= dias * (1000 * 60 * 60 * 24);
+  const horas   = Math.floor(diff / (1000 * 60 * 60));
+  diff -= horas * (1000 * 60 * 60);
+  const minutos = Math.floor(diff / (1000 * 60));
+  diff -= minutos * (1000 * 60);
+  const segundos = Math.floor(diff / 1000);
+
+  document.getElementById('d').textContent = dias;
+  document.getElementById('h').textContent = horas;
+  document.getElementById('m').textContent = minutos;
+  document.getElementById('s').textContent = segundos;
+}
+atualizarContador();
+setInterval(atualizarContador, 1000); // atualiza a cada segundo
+
+/* =========================================================
+   3. CARTA DE AMOR (abrir / fechar modal)
+   ========================================================= */
+const letterModal = document.getElementById('letterModal');
+
+document.getElementById('openLetter').addEventListener('click', () => {
+  letterModal.classList.add('open');
+});
+document.getElementById('closeLetter').addEventListener('click', () => {
+  letterModal.classList.remove('open');
+});
+// fecha ao clicar fora da carta
+letterModal.addEventListener('click', (e) => {
+  if (e.target === letterModal) letterModal.classList.remove('open');
+});
+// fecha com a tecla ESC
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') letterModal.classList.remove('open');
+});
+
+/* =========================================================
+   4. ANIMAÇÃO DE ENTRADA AO ROLAR (reveal + timeline)
+   ========================================================= */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('in');
+  });
+}, { threshold: 0.15 });
+
+// observa as seções com .reveal e os itens da timeline
+document.querySelectorAll('.reveal, .tl-item').forEach(el => observer.observe(el));
+
+/* =========================================================
+   5. CORAÇÕES FLUTUANTES NO FUNDO (canvas)
+   ========================================================= */
+const canvas = document.getElementById('hearts');
+const ctx = canvas.getContext('2d');
+let W, H, hearts;
+
+function resize(){
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// cria a lista de corações com posições e velocidades aleatórias
+function criarCoracoes(){
+  hearts = [];
+  const qtd = Math.min(28, Math.floor(W / 45)); // menos corações em telas pequenas
+  for (let i = 0; i < qtd; i++){
+    hearts.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      size: 8 + Math.random() * 14,
+      speed: 0.3 + Math.random() * 0.8,
+      drift: -0.5 + Math.random(),       // balanço lateral
+      alpha: 0.15 + Math.random() * 0.35 // transparência sutil
+    });
+  }
+}
+criarCoracoes();
+
+// desenha um coração no contexto
+function desenharCoracao(x, y, size, alpha){
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(size / 20, size / 20);
+  ctx.beginPath();
+  ctx.moveTo(0, 6);
+  ctx.bezierCurveTo(-10, -6, -18, 6, 0, 18);
+  ctx.bezierCurveTo(18, 6, 10, -6, 0, 6);
+  ctx.closePath();
+  ctx.fillStyle = `rgba(233, 92, 119, ${alpha})`;
+  ctx.fill();
+  ctx.restore();
+}
+
+// loop de animação
+function animar(){
+  ctx.clearRect(0, 0, W, H);
+  hearts.forEach(h => {
+    h.y -= h.speed;               // sobe
+    h.x += h.drift * 0.4;         // balança de leve
+    // quando sai pelo topo, reaparece embaixo
+    if (h.y < -30){
+      h.y = H + 30;
+      h.x = Math.random() * W;
+    }
+    desenharCoracao(h.x, h.y, h.size, h.alpha);
+  });
+  requestAnimationFrame(animar);
+}
+animar();
+</script>
+
+</body>
+</html>
